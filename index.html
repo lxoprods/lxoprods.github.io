@@ -2,104 +2,85 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>La Capsule Studio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
-
-
-<script>
-(function() {
-  var img = new Image();
-  img.crossOrigin = 'anonymous';
-  img.onload = function() {
-    var c = document.createElement('canvas');
-    c.width = 64; c.height = 64;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, 64, 64);
-    ctx.drawImage(img, 0, 0, 64, 64);
-    var d = ctx.getImageData(0, 0, 64, 64);
-    for (var i = 0; i < d.data.length; i += 4) {
-      var r = d.data[i], g = d.data[i+1], b = d.data[i+2];
-      if (r < 25 && g < 25 && b < 25) d.data[i+3] = 0;
-    }
-    ctx.putImageData(d, 0, 0);
-    var lnk = document.querySelector("link[rel='icon']") || document.createElement('link');
-    lnk.rel = 'icon'; lnk.type = 'image/png';
-    lnk.href = c.toDataURL('image/png');
-    document.head.appendChild(lnk);
-  };
-  img.src = 'images/logo.png';
-})();
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#accueil">
-    <img src="images/logo.png" class="logo-icon" alt="La Capsule Studio" style="width:48px;height:48px;object-fit:contain;mix-blend-mode:screen;">
+  <a class="nav-logo" href="#accueil" onclick="smoothTo('accueil');return false;">
+    <img src="images/logo.png" class="logo-icon" alt="La Capsule Studio">
   </a>
-
   <ul class="nav-links" id="navLinks">
     <li><a href="#accueil" id="nav-accueil" class="active" onclick="smoothTo('accueil');return false;">ACCUEIL</a></li>
     <li><a href="#studios" id="nav-studios" onclick="smoothTo('studios');return false;">NOS STUDIOS</a></li>
     <li><a href="#tarifs" id="nav-tarifs" onclick="smoothTo('tarifs');return false;">TARIFS</a></li>
   </ul>
-
-  <div style="display:flex;align-items:center;gap:16px">
-    <a class="btn-reserve" href="#contact">RÉSERVER</a>
-    <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  <div class="nav-right">
+    <a class="btn-reserve" href="#contact" onclick="smoothTo('contact');return false;">RÉSERVER</a>
+    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
   </div>
 </nav>
 
-<!-- ========== PAGE ACCUEIL ========== -->
+<!-- ========== ACCUEIL ========== -->
 <section id="accueil" class="page">
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-bg"></div>
+  <!-- HERO avec vidéo -->
+  <div class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="video-bg.mp4" type="video/mp4">
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-tag">Studio d'enregistrement</p>
       <h1 class="hero-title">LA<br><span>CAPSULE</span><br>STUDIO</h1>
       <p class="hero-sub">Régie de mixage haut de gamme, cabines vocales acoustiquement traitées et zones lounge chaleureuses — où le son et le confort se rencontrent.</p>
-      <a href="#contact" class="hero-cta">RÉSERVER UNE SESSION</a>
-    </div>
-      <span>SCROLL</span>
-    </div>
-  </section>
+      <a href="#contact" class="hero-cta" onclick="smoothTo('contact');return false;">RÉSERVER UNE SESSION</a>
 
-  <!-- À Propos -->
-  <section style="display:grid !important;grid-template-columns:1fr 1fr !important;align-items:stretch !important;overflow:hidden !important;scroll-margin-top:70px;" class="section-about">
-    <div style="position:relative;overflow:hidden;min-height:600px;">
-      <img src="images/photo-01.jpg" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;">
+      <!-- Localisation -->
+      <div class="hero-location">
+        <div class="location-top">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M8 0C4.13 0 1 3.13 1 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 115.5 7 2.5 2.5 0 018 9.5z" fill="#C85A00"/></svg>
+          <span class="location-city">Argenteuil <span>95100</span></span>
+        </div>
+        <div class="location-transports">
+          <div class="transport-badge rer">RER</div>
+          <div class="transport-badge line-j">J</div>
+          <div class="transport-badge line-l">L</div>
+          <div class="transport-sep">|</div>
+          <div class="transport-badge tram">T2</div>
+          <div class="transport-sep">·</div>
+          <span class="transport-bus">Bus 272 · 340</span>
+        </div>
+      </div>
     </div>
-    <div style="background:linear-gradient(160deg,#c05500 0%,#8a3800 60%,#5a2200 100%);padding:60px 55px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;">
+  </div>
+
+  <!-- À PROPOS -->
+  <div class="section-about">
+    <div class="about-img">
+      <img src="images/photo-01.jpg" alt="Studio La Capsule">
+    </div>
+    <div class="about-content">
       <h2>À PROPOS<br>DE NOUS</h2>
       <p><strong>La Capsule Studio</strong> est un espace de création professionnel alliant régie de mixage haut de gamme, cabines vocales acoustiquement traitées et zones lounge chaleureuses, pour offrir aux artistes un environnement inspirant où le son et le confort se rencontrent.</p>
-      
-      <!-- Spotify -->
-      <div style="margin-top:30px;">
-        <div style="margin-top:4px;">
-          <p style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Nos projets</p>
-          <iframe style="border-radius:8px" src="https://open.spotify.com/embed/playlist/1bwnCoMisP1FJUSFYsH07v?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
+      <div class="spotify-wrap">
+        <p class="spotify-label">NOS PROJETS</p>
+        <iframe src="https://open.spotify.com/embed/playlist/1bwnCoMisP1FJUSFYsH07v?utm_source=generator&theme=0" width="100%" height="320" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:8px;"></iframe>
       </div>
       <div class="card-project">
         <h4>DÉMARRER UN PROJET</h4>
         <p>Prêt à créer votre prochain projet ? Contactez-nous pour une session d'enregistrement ou le mixage de votre prochain titre.</p>
+      </div>
     </div>
-  </section>
-
-  <!-- Contact -->
-  
+  </div>
 
 </section>
 
-<!-- ========== PAGE NOS STUDIOS ========== -->
+<!-- ========== NOS STUDIOS ========== -->
 <section id="studios" class="page">
 
   <div class="page-header">
@@ -115,24 +96,14 @@
     </div>
     <div class="studio-gallery">
       <div class="gallery-slider" id="gallery-a">
-      <div class="gallery-slide active">
-        <img onclick="openLightbox(this)" src="images/photo-01.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-slide active"><img onclick="openLightbox(this)" src="images/photo-01.jpg" alt="Studio A"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-02.jpg" alt="Studio A"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-03.jpg" alt="Studio A"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-04.jpg" alt="Studio A"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-05.jpg" alt="Studio A"></div>
       </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-03.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-04.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-05.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      </div>
-      <button class="gallery-arrow prev" onclick="slideGallery('a', -1)">‹</button>
-      <button class="gallery-arrow next" onclick="slideGallery('a', 1)">›</button>
+      <button class="gallery-arrow prev" onclick="slideGallery('a',-1)">‹</button>
+      <button class="gallery-arrow next" onclick="slideGallery('a',1)">›</button>
       <div class="gallery-nav" id="dots-a">
         <button class="gallery-dot active" onclick="goSlide('a',0)"></button>
         <button class="gallery-dot" onclick="goSlide('a',1)"></button>
@@ -152,24 +123,14 @@
     </div>
     <div class="studio-gallery">
       <div class="gallery-slider" id="gallery-b">
-      <div class="gallery-slide active">
-        <img onclick="openLightbox(this)" src="images/photo-06.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-slide active"><img onclick="openLightbox(this)" src="images/photo-06.jpg" alt="Studio B"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-07.jpg" alt="Studio B"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-08.jpg" alt="Studio B"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-09.jpg" alt="Studio B" style="object-position:center 15%"></div>
+        <div class="gallery-slide"><img onclick="openLightbox(this)" src="images/photo-10.jpg" alt="Studio B"></div>
       </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-07.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-08.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-09.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;">
-      </div>
-      <div class="gallery-slide">
-        <img onclick="openLightbox(this)" src="images/photo-10.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-      </div>
-      <button class="gallery-arrow prev" onclick="slideGallery('b', -1)">‹</button>
-      <button class="gallery-arrow next" onclick="slideGallery('b', 1)">›</button>
+      <button class="gallery-arrow prev" onclick="slideGallery('b',-1)">‹</button>
+      <button class="gallery-arrow next" onclick="slideGallery('b',1)">›</button>
       <div class="gallery-nav" id="dots-b">
         <button class="gallery-dot active" onclick="goSlide('b',0)"></button>
         <button class="gallery-dot" onclick="goSlide('b',1)"></button>
@@ -182,137 +143,87 @@
 
 </section>
 
-<!-- ========== PAGE TARIFS ========== -->
+<!-- ========== TARIFS ========== -->
 <section id="tarifs" class="page">
 
   <div class="page-header">
     <h1>NOS <span>TARIFS</span></h1>
   </div>
-
   <div class="tarifs-intro">
-    <p>Des formules adaptées à tous vos projets musicaux — de la session horaire au forfait journée, en passant par le mixage et le mastering professionnel.</p>
+    <p>Des formules adaptées à tous vos projets — de la session horaire au forfait journée, en passant par le mixage et le mastering professionnel.</p>
   </div>
 
-  <!-- Studio A Tarifs -->
-  <div class="studio-tarif-block" style="position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:url('images/photo-04.jpg');background-size:cover;background-position:center;filter:blur(4px);transform:scale(1.05);opacity:0.18;pointer-events:none;"></div>
+  <div class="studio-tarif-block">
+    <div class="tarif-bg" style="background-image:url('images/photo-04.jpg')"></div>
     <div class="tarif-header">
       <h2>STUDIO A — TARIFS</h2>
       <p>Un espace de création premium alliant une cabine de prise de son intimiste, une régie entièrement équipée et un salon lounge pour accueillir vos sessions dans un cadre professionnel et chaleureux.</p>
     </div>
     <div class="tarif-cards">
-      <div class="tarif-card">
-        <h4>Tarif horaire</h4>
-        <div class="price">50€/h</div>
-        <div class="detail">Minimum 2h</div>
-      </div>
-      <div class="tarif-card">
-        <h4>Forfait journée</h4>
-        <div class="price">360€</div>
-        <div class="detail">8 heures</div>
-      </div>
-      <div class="tarif-card">
-        <h4>Forfait 30h ou +</h4>
-        <div class="price-devis">Sur<br>devis</div>
-        <div class="detail">Contactez-nous</div>
-      </div>
+      <div class="tarif-card"><h4>Tarif horaire</h4><div class="price">50€/h</div><div class="detail">Minimum 2h</div></div>
+      <div class="tarif-card"><h4>Forfait journée</h4><div class="price">360€</div><div class="detail">8 heures</div></div>
+      <div class="tarif-card"><h4>Forfait 30h ou +</h4><div class="price-devis">Sur<br>devis</div><div class="detail">Contactez-nous</div></div>
     </div>
   </div>
 
-  <!-- Studio B Tarifs -->
-  <div class="studio-tarif-block" style="background:#0d0d0d;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:url('images/photo-11.jpg');background-size:cover;background-position:center;filter:blur(4px);transform:scale(1.05);opacity:0.18;pointer-events:none;"></div>
+  <div class="studio-tarif-block dark">
+    <div class="tarif-bg" style="background-image:url('images/photo-11.jpg')"></div>
     <div class="tarif-header">
       <h2>STUDIO B — TARIFS</h2>
       <p>Un studio intimiste, avec sa cabine vocale acoustiquement traitée, sa régie soignée équipée de moniteurs de référence et son coin lounge chaleureux, pensé pour les artistes et les compositeurs.</p>
     </div>
     <div class="tarif-cards">
-      <div class="tarif-card">
-        <h4>Tarif horaire</h4>
-        <div class="price">35€/h</div>
-        <div class="detail">Minimum 2h</div>
-      </div>
-      <div class="tarif-card">
-        <h4>Forfait journée</h4>
-        <div class="price">245€</div>
-        <div class="detail">8 heures</div>
-      </div>
-      <div class="tarif-card">
-        <h4>Forfait 30h ou +</h4>
-        <div class="price-devis">Sur<br>devis</div>
-        <div class="detail">Contactez-nous</div>
-      </div>
+      <div class="tarif-card"><h4>Tarif horaire</h4><div class="price">35€/h</div><div class="detail">Minimum 2h</div></div>
+      <div class="tarif-card"><h4>Forfait journée</h4><div class="price">245€</div><div class="detail">8 heures</div></div>
+      <div class="tarif-card"><h4>Forfait 30h ou +</h4><div class="price-devis">Sur<br>devis</div><div class="detail">Contactez-nous</div></div>
     </div>
   </div>
 
-  <!-- Mixage & Mastering -->
-  <div class="mixage-block" style="position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:url('images/photo-12.jpg');background-size:cover;background-position:center;filter:blur(6px);transform:scale(1.05);opacity:0.2;pointer-events:none;"></div>
+  <div class="mixage-block">
+    <div class="tarif-bg" style="background-image:url('images/photo-12.jpg');opacity:0.2;filter:blur(6px)"></div>
     <h2>MIXAGE & MASTERING</h2>
     <div class="mixage-cards">
-      <div class="mixage-card">
-        <h4>Face B</h4>
-        <div class="price">130€</div>
-        <div class="detail">prod mp3 ou wav</div>
-      </div>
-      <div class="mixage-card">
-        <h4>Face A</h4>
-        <div class="price">160€</div>
-        <div class="detail">prod multipistes</div>
-      </div>
+      <div class="mixage-card"><h4>Face B</h4><div class="price">130€</div><div class="detail">prod mp3 ou wav</div></div>
+      <div class="mixage-card"><h4>Face A</h4><div class="price">160€</div><div class="detail">prod multipistes</div></div>
+      <div class="mixage-card"><h4>Mastering</h4><div class="price">30€</div><div class="detail">par track</div></div>
     </div>
-    <div class="mastering-tag" style="background:white;border:none;padding:28px 36px;text-align:center;min-width:220px;display:inline-block;">
-        <h4 style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:12px;font-weight:600;">Mastering</h4>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#C85A00;line-height:1;margin-bottom:6px;">30€</div>
-        <div style="font-size:12px;color:#888;">par track</div>
-      </div>
   </div>
 
 </section>
 
-
-
-<section class="section-contact" id="contact">
-    <h2>NOUS CONTACTER</h2>
-    <div class="contact-form-wrap">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" id="prenom" placeholder="Votre prénom">
-        </div>
-        <div class="form-group">
-          <label>Nom</label>
-          <input type="text" id="nom" placeholder="Votre nom">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Service souhaité</label>
-        <div class="select-wrap">
-          <select id="service">
-            <option value="">Sélectionner un service</option>
-            <option>Enregistrement — Studio A</option>
-            <option>Enregistrement — Studio B</option>
-            <option>Mixage (Face B — mp3/wav)</option>
-            <option>Mixage (Face A — multipistes)</option>
-            <option>Mastering</option>
-            <option>Forfait journée</option>
-            <option>Information</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="message" placeholder="Décrivez votre projet, vos disponibilités..."></textarea>
-      </div>
-      <button class="btn-submit" onclick="sendForm()">ENVOYER LA DEMANDE</button>
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="section-contact">
+  <h2>NOUS CONTACTER</h2>
+  <div class="contact-form-wrap">
+    <div class="form-row">
+      <div class="form-group"><label>Prénom</label><input type="text" id="prenom" placeholder="Votre prénom"></div>
+      <div class="form-group"><label>Nom</label><input type="text" id="nom" placeholder="Votre nom"></div>
     </div>
-  </section>
+    <div class="form-group">
+      <label>Service souhaité</label>
+      <div class="select-wrap">
+        <select id="service">
+          <option value="">Sélectionner un service</option>
+          <option>Enregistrement — Studio A</option>
+          <option>Enregistrement — Studio B</option>
+          <option>Mixage (Face B — mp3/wav)</option>
+          <option>Mixage (Face A — multipistes)</option>
+          <option>Mastering</option>
+          <option>Forfait journée</option>
+          <option>Information</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group"><label>Message</label><textarea id="message" placeholder="Décrivez votre projet, vos disponibilités..."></textarea></div>
+    <button class="btn-submit" onclick="sendForm()">ENVOYER LA DEMANDE</button>
+  </div>
+</section>
 
-<!-- ===== FOOTER (shared) ===== -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-info">
-      <img src="images/logo.png" class="footer-logo" alt="La Capsule Studio" style="width:50px;height:50px;object-fit:contain;mix-blend-mode:screen;">
+      <img src="images/logo.png" class="footer-logo" alt="La Capsule Studio">
       <div class="footer-contact">
         <p>lacapsulestudio@gmail.com</p>
         <p>06 65 58 04 91</p>
@@ -331,18 +242,15 @@
   <div class="footer-bottom">© 2026 La Capsule Studio — Tous droits réservés.</div>
 </footer>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-
-
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightbox()">×</button>
   <button class="lightbox-arrow prev" onclick="event.stopPropagation();lbNav(-1)">‹</button>
   <img id="lightbox-img" src="" alt="">
   <button class="lightbox-arrow next" onclick="event.stopPropagation();lbNav(1)">›</button>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
