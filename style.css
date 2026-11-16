@@ -56,6 +56,16 @@ section.page { scroll-margin-top: 70px; }
 .transport-sep { color: rgba(255,255,255,0.3); font-size: 16px; }
 .transport-bus { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; }
 
+/* ===== ARTISTES (bandeau défilant) ===== */
+.artists-ticker { overflow: hidden; background: var(--black); border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 12px 0; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.artists-track { display: flex; width: max-content; animation: artists-scroll 45s linear infinite; }
+.artists-group { display: flex; flex-shrink: 0; }
+.artists-group span { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap; padding: 0 22px; position: relative; }
+.artists-group span::after { content: '•'; position: absolute; right: -4px; color: var(--orange); opacity: 0.7; }
+@keyframes artists-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .artists-track { animation-duration: 120s; } }
+@media (max-width: 768px) { .artists-ticker { padding: 10px 0; } .artists-group span { font-size: 10px; letter-spacing: 2.5px; padding: 0 16px; } .artists-track { animation-duration: 35s; } }
+
 /* ===== À PROPOS ===== */
 .section-about { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
 .about-img { overflow: hidden; }
