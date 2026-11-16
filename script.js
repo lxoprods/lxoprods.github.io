@@ -1,25 +1,3 @@
-// ===== FAVICON TRANSPARENT =====
-(function() {
-  var img = new Image();
-  img.onload = function() {
-    var c = document.createElement('canvas');
-    c.width = 64; c.height = 64;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, 64, 64);
-    ctx.drawImage(img, 0, 0, 64, 64);
-    var d = ctx.getImageData(0, 0, 64, 64);
-    for (var i = 0; i < d.data.length; i += 4) {
-      if (d.data[i] < 25 && d.data[i+1] < 25 && d.data[i+2] < 25) d.data[i+3] = 0;
-    }
-    ctx.putImageData(d, 0, 0);
-    var lnk = document.querySelector("link[rel='icon']") || document.createElement('link');
-    lnk.rel = 'icon'; lnk.type = 'image/png';
-    lnk.href = c.toDataURL('image/png');
-    document.head.appendChild(lnk);
-  };
-  img.src = 'images/logo.png';
-})();
-
 // ===== MENU MOBILE =====
 function toggleMenu() {
   var nav = document.getElementById('navLinks');
