@@ -31,7 +31,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var
 section.page { scroll-margin-top: 70px; }
 
 /* ===== HERO ===== */
-.hero { position: relative; min-height: calc(100vh - 70px); display: flex; align-items: center; overflow: hidden; background: #0a0a0a; }
+.hero { position: relative; min-height: calc(100vh - 70px - 40px); display: flex; align-items: center; overflow: hidden; background: #0a0a0a; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.2) 100%); }
 .hero-content { position: relative; z-index: 2; padding: 60px 80px; max-width: 680px; }
@@ -57,14 +57,14 @@ section.page { scroll-margin-top: 70px; }
 .transport-bus { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; }
 
 /* ===== ARTISTES (bandeau défilant) ===== */
-.artists-ticker { overflow: hidden; background: var(--black); border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 12px 0; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.artists-ticker { overflow: hidden; background: var(--black); border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; height: 40px; display: flex; align-items: center; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
 .artists-track { display: flex; width: max-content; animation: artists-scroll 45s linear infinite; }
 .artists-group { display: flex; flex-shrink: 0; }
 .artists-group span { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap; padding: 0 22px; position: relative; }
 .artists-group span::after { content: '•'; position: absolute; right: -4px; color: var(--orange); opacity: 0.7; }
 @keyframes artists-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .artists-track { animation-duration: 120s; } }
-@media (max-width: 768px) { .artists-ticker { padding: 10px 0; } .artists-group span { font-size: 10px; letter-spacing: 2.5px; padding: 0 16px; } .artists-track { animation-duration: 35s; } }
+@media (max-width: 768px) { .artists-ticker { height: 36px; } .artists-group span { font-size: 10px; letter-spacing: 2.5px; padding: 0 16px; } .artists-track { animation-duration: 35s; } }
 
 /* ===== À PROPOS ===== */
 .section-about { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
@@ -209,6 +209,15 @@ footer { background: var(--black); border-top: 1px solid #1a1a1a; padding: 40px 
 .fade-in { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* Écrans d'ordinateur peu hauts : accueil plus compact pour voir le bandeau des artistes dès l'arrivée */
+@media (min-width: 769px) and (max-height: 900px) {
+  .hero-content { padding-top: 3vh; padding-bottom: 3vh; }
+  .hero-tag { margin-bottom: 1.6vh; }
+  .hero-title { font-size: clamp(56px, 12.5vh, 130px); margin-bottom: 2.4vh; }
+  .hero-sub { margin-bottom: 3vh; }
+  .hero-cta { margin-bottom: 3vh; }
+}
+
 /* ====================================================
    RESPONSIVE — TABLET (max 1024px)
    ==================================================== */
@@ -250,7 +259,7 @@ footer { background: var(--black); border-top: 1px solid #1a1a1a; padding: 40px 
   .btn-reserve { padding: 8px 16px; font-size: 11px; }
 
   /* Hero */
-  .hero { min-height: calc(100svh - 60px); align-items: flex-end; padding-bottom: 40px; }
+  .hero { min-height: calc(100svh - 60px - 36px); align-items: flex-end; padding-bottom: 40px; }
   .hero-content { padding: 0 24px 0; max-width: 100%; }
   .hero-title { font-size: clamp(52px, 16vw, 80px); }
   .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 28px; }
