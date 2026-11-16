@@ -65,7 +65,7 @@ section.page { scroll-margin-top: 70px; }
 .about-content > p { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.85); }
 .about-content strong { color: var(--white); font-weight: 600; }
 .spotify-wrap { display: flex; flex-direction: column; gap: 10px; }
-.spotify-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.spotify-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 .card-project { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 24px 28px; }
 .card-project h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
 .card-project p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
